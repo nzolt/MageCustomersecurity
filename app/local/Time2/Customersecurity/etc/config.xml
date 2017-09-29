@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category   Time2
+ * @package    Time2_Customersecurity
+ * @author     Time2 Digital Limited <zoltan.nagy@time2.digital>
+ * @copyright  Copyright (c) 2016 Time2 Digital Limited (http://www.visiondirect.co.uk)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <modules>
+        <Time2_Customersecurity>
+            <version>1.0.0</version>
+        </Time2_Customersecurity>
+    </modules>
+    <global>
+        <models>
+            <customersecurity>
+                <class>Time2_Customersecurity_Model</class>
+                <resourceModel>customersecurity_mysql4</resourceModel>
+            </customersecurity>
+            <customersecurity_mysql4>
+                <class>Time2_Customersecurity_Model_Mysql4</class>
+                <entities>
+                    <login_fail>
+                        <table>customersecurity_login_fail</table>
+                    </login_fail>
+                </entities>
+            </customersecurity_mysql4>
+            <customer>
+                <rewrite>
+                    <customer>Time2_Customersecurity_Model_Customer</customer>
+                </rewrite>
+            </customer>
+        </models>
+        <resources>
+            <customersecurity_setup>
+                <setup>
+                    <module>Time2_Customersecurity</module>
+                    <class>Mage_Eav_Model_Entity_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </customersecurity_setup>
+            <customersecurity_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </customersecurity_write>
+            <customersecurity_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </customersecurity_read>
+        </resources>
+        <blocks>
+            <customersecurity>
+                <class>Time2_Customersecurity_Block</class>
+            </customersecurity>
+            <adminhtml>
+                <rewrite>
+                    <customer_edit_tab_account>Time2_Customersecurity_Block_Adminhtml_Customer_Edit_Tab_Account</customer_edit_tab_account>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+        <helpers>
+            <customersecurity>
+                <class>Time2_Customersecurity_Helper</class>
+            </customersecurity>
+        </helpers>
+        <events>
+            <controller_action_layout_render_before_adminhtml_customer_edit>
+                <observers>
+                    <customersecurity_activate_customer_account>
+                        <class>Time2_Customersecurity_Model_Observer</class>
+                        <method>activateCustomerAccount</method>
+                        <type>singleton</type>
+                    </customersecurity_activate_customer_account>
+                </observers>
+            </controller_action_layout_render_before_adminhtml_customer_edit>
+            <controller_action_predispatch_customer_account_forgotpasswordpost>
+                <observers>
+                    <customer_account_forget_password_security_lockout_forgotpasswordpost>
+                        <class>Time2_Customersecurity_Model_Observer</class>
+                        <method>isCustomerAccountLockedOutForgotPassword</method>
+                        <type>singleton</type>
+                    </customer_account_forget_password_security_lockout_forgotpasswordpost>
+                </observers>
+            </controller_action_predispatch_customer_account_forgotpasswordpost>
+        </events>
+    </global>
+    <frontend>
+        <translate>
+            <modules>
+                <customersecurity>
+                    <files>
+                        <default>Time2_Customersecurity.csv</default>
+                    </files>
+                </customersecurity>
+            </modules>
+        </translate>
+    </frontend>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <customersecurity before="Mage_Adminhtml">Time2_Customersecurity_Adminhtml</customersecurity>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <default>
+        <customersecurity>
+            <login>
+                <lockout_enabled>1</lockout_enabled>
+                <login_attempt>3</login_attempt>
+                <lockout_period>60</lockout_period>
+                <login_period>10</login_period>
+            </login>
+        </customersecurity>
+    </default>
+</config>

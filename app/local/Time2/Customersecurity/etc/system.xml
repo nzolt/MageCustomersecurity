@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+* Magento
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Open Software License (OSL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/osl-3.0.php
+* If you did not receive a copy of the license and are unable to
+* obtain it through the world-wide-web, please send an email
+* to license@magentocommerce.com so we can send you a copy immediately.
+*
+* @category   Time2
+* @package    Time2_Customersecurity
+* @author     Time2 Digital Limited <zoltan.nagy@time2.digital>
+* @copyright  Copyright (c) 2016 Time2 Digital Limited (http://www.visiondirect.co.uk)
+* @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+*/
+-->
+
+<config>
+    <sections>
+        <customersecurity translate="label" module="customersecurity">
+            <label>Customer Security</label>
+            <tab>customer</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>140</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <login translate="label">
+                    <label>Login Security Options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <lockout_enabled translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Toggle on/off watching login attempt failures]]></comment>
+                        </lockout_enabled>
+                        <login_attempt translate="label">
+                            <label>Login attempts allowed</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Number of failed login attempts until customer account is suspended (default: 3)]]></comment>
+                        </login_attempt>
+                        <lockout_period translate="label">
+                            <label>Lockout period</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Account suspend time in minutes (default: 60)]]></comment>
+                        </lockout_period>
+                        <login_period translate="label">
+                            <label>Login period</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Time in minutes for consecutive login attempts (default: 10)]]></comment>
+                        </login_period>
+                    </fields>
+                </login>
+            </groups>
+        </customersecurity>
+    </sections>
+</config>
